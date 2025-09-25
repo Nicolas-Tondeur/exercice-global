@@ -39,11 +39,11 @@
 
 
 - name: Déployer config nginx depuis template
-  template:
+  ansible.builtin.template:
     src: nginx-app.j2
     dest: /etc/nginx/sites-available/{{ nginx_site_name }}
     mode: '0644'
-    notify: Reload nginx
+  notify: Reload nginx
 
 
 
