@@ -105,7 +105,9 @@ Résultat de l'exécution sur la branche main :
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
 
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
+
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
