@@ -29,13 +29,13 @@
 - name: Installer dépendances node
   command: npm ci
   args:
-    chdir: "{{ app_dest }}"
+    chdir: "{{ app_dest }}/app"
 
 
 - name: Builder l'application
   command: npm run build
   args:
-    chdir: "{{ app_dest }}"
+    chdir: "{{ app_dest }}/app"
 
 
 - name: Déployer config nginx depuis template
