@@ -41,6 +41,11 @@ jobs:
         with:
           ssh-private-key: ${{ github.ref == 'refs/heads/dev' && secrets.ID_RSA_DEV || secrets.ID_RSA_PROD }}
 
+      - name: known_hosts ajout
+        run: |
+          ssh-keyscan -p 2222 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 2200 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
+          
       - name: Deploy to Dev
         if: github.ref == 'refs/heads/dev'
         run: |
@@ -50,8 +55,3 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: |
           ansible-playbook -i ansible/inventory/prod.ini ansible/playbooks/deploy-prod.yml
-
-      - name: known_hosts ajout
-        run: |
-          ssh-keyscan -p 2222 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
-          ssh-keyscan -p 2200 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
