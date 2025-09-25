@@ -40,6 +40,7 @@ Environnement	  Hôte Simulé	    Port Externe	Branche Déployée
    PROD	        serveur-prod	       2200	            main
 
 On a récupéré les Clés SSH de l'instance EC2 et des 2 conteneurs prod & dev pour les ajouter aux secrets GitHub.
+
 <img width="945" height="312" alt="image" src="https://github.com/user-attachments/assets/daf9cdb4-a4c4-4a88-9b63-85cf53355466" />
 
 
@@ -91,6 +92,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
