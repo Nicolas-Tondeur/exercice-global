@@ -1,0 +1,29 @@
+name: Deploy TestApp
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Installer Ansible
+        run: sudo apt update && sudo apt install -y ansible sshpass
+
+      - name: Create private key file
+        run: |
+          echo "${{ secrets.AWS_SSH_KEY }}" > aws_app_todo.pem
+          chmod 600 aws_app_todo.pem
+
+      - name: Déploiement avec Ansible
+        run: |
+          ansible-playbook -i AWS/inventory_aws.ini AWS/deploy.yml
+
+      - name: Remove key file
+        run: rm -f aws_app_todo.pem
