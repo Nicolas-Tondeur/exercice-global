@@ -37,13 +37,9 @@ Pour des raisons de praticité, l’environnement Docker tourne sur une instance
 
 Les serveurs sont des conteneurs Docker avec accès SSH configuré.
 
-Environnement	  Hôte Simulé	    Port Externe	Branche Déployée
-   DEV	        serveur-dev	       2222	            dev
-   PROD	        serveur-prod	       2200	            main
-
-On a récupéré les Clés SSH de l'instance EC2 et des 2 conteneurs prod & dev pour les ajouter aux secrets GitHub.
-
-<img width="945" height="312" alt="image" src="https://github.com/user-attachments/assets/daf9cdb4-a4c4-4a88-9b63-85cf53355466" />
+Environnement	  Hôte Simulé	    Port Externe	  Branche Déployée
+   DEV	        serveur-dev	         2222	            dev
+   PROD	       serveur-prod	        2200	            main
 
 
 ## 4. Configuration Ansible (Étapes 3 & 4)
@@ -66,7 +62,11 @@ Vérification: Crée un fichier de log ou une page de confirmation pour valider 
 Le workflow est défini dans .github/workflows/pipeline.yml.
 
 ### 5.1. Gestion des Secrets (Étape 5)
-Les clés privées SSH nécessaires à Ansible pour se connecter aux serveurs Docker sont stockées dans les GitHub Secrets. DEV_SSH_KEY & PROD_SSH_KEY
+Les clés privées SSH nécessaires à Ansible pour se connecter aux serveurs Docker sont stockées dans les GitHub Secrets. ID_RSA_PROD & PROD_SSH_DEV.
+
+La clé privée SSH nécessaires à Ansible pour se connecter à l'instance EC2 est également stockée dans les GitHub Secrets. UBUNTU_KEY.
+
+<img width="945" height="312" alt="image" src="https://github.com/user-attachments/assets/daf9cdb4-a4c4-4a88-9b63-85cf53355466" />
 
 Cela garantit qu'aucun credential n'est stocké en clair dans le dépôt.
 
@@ -109,6 +109,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
