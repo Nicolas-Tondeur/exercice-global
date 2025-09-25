@@ -1,11 +1,15 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const dist = __dirname + '/dist';
 
-app.get('/', (req, res) => {
-  res.send(`Hello from the **${process.env.ENV_NAME || 'Default'}** environment!`);
-});
 
-app.listen(port, () => {
-  console.log(`App listening at port ${port}`);
-});
+if (fs.existsSync(dist)) {
+    app.use(express.static(dist));
+} else {
+    app.get('/', (req, res) => res.send('App non buildée — lancer `npm run build`'));
+}
+
+
+app.listen(port, () => console.log(`Demo app listening on ${port}`));
