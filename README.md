@@ -86,12 +86,27 @@ Pour valider le bon fonctionnement de la chaîne CI/CD :
 
 Test DEV: Pousser une modification sur la branche dev. Le workflow doit se déclencher et l'application mise à jour doit être visible sur serveur-dev (Port 2222).
 
+Résultat de l'exécution sur la branche dev : 
+
+<img width="706" height="211" alt="image" src="https://github.com/user-attachments/assets/2cbaa26c-44cf-4390-8cc1-8e328e21c0ee" />
+
+<img width="402" height="636" alt="image" src="https://github.com/user-attachments/assets/41254069-31b4-46d7-8f1a-dc3e74c6fa38" /> <img width="355" height="636" alt="image" src="https://github.com/user-attachments/assets/ee1f6c30-c70f-4a45-96b3-fe32f565541a" />
+
+
 Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Production doit être déclenché, mettant à jour l'application sur serveur-prod (Port 2200).
+
+Résultat de l'exécution sur la branche main : 
+
+<img width="706" height="211" alt="image" src="https://github.com/user-attachments/assets/f3ebf042-1094-422c-ac35-7accb906de8c" />
+
+<img width="402" height="636" alt="image" src="https://github.com/user-attachments/assets/86fda964-e322-496a-afd3-1e145a908539" /> <img width="357" height="633" alt="image" src="https://github.com/user-attachments/assets/939262d6-a95a-4336-b02b-47bb3288eb2b" />
+
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
 
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
