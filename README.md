@@ -1,7 +1,7 @@
 [![CI/CD Pipeline](https://github.com/Nicolas-Tondeur/exercice-global/actions/workflows/pipeline.yml/badge.svg)](https://github.com/Nicolas-Tondeur/exercice-global/actions/workflows/pipeline.yml) \
 https://github.com/Nicolas-Tondeur/exercice-global/actions/runs/18015026928
 
-#Exercice Final: Projet CI/CD & Déploiement Multi-Environnements (DEV/PROD)
+# Exercice Final: Projet CI/CD & Déploiement Multi-Environnements (DEV/PROD)
 
 ## 1. Contexte du Projet
 Ce projet vise à automatiser entièrement le cycle de vie d'une application Web, du code source au déploiement en production, en utilisant une chaîne d'intégration et de déploiement continu (CI/CD).
@@ -107,6 +107,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
