@@ -1,1 +1,16 @@
 
+# Dépendances Node
+node_modules
+
+# Secrets et Clés
+ci_key
+ci_key.pub
+vault.yml
+
+# Logs et temporaires
+*.log
+*.retry
+
+# Pour Docker
+prod_keys/
+dev_keys/
