@@ -1,16 +1,23 @@
-
-# Dépendances Node
-node_modules
-
-# Secrets et Clés
-ci_key
-ci_key.pub
-vault.yml
-
-# Logs et temporaires
+# Node.js
+node_modules/
+dist/
+build/
 *.log
+
+# Docker
+docker/*.env
+
+# SSH keys (ignorer les privées, garder .pub et authorized_keys)
+keys/*_id_*
+!keys/*.pub
+!keys/*authorized_keys
+!keys/README_KEYS.md
+
+# Python / Ansible
+__pycache__/
 *.retry
 
-# Pour Docker
-prod_keys/
-dev_keys/
+# OS/IDE
+.DS_Store
+.vscode/
+.idea/
