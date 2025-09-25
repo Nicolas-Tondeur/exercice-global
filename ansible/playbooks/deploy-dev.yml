@@ -4,4 +4,4 @@
     repo_url: "{{ repo_url | default('https://github.com/Nicolas-Tondeur/exercice-global.git') }}"
     branch: "dev"
   roles:
-    - role: app
+    - role: ../roles/app

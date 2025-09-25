@@ -3,19 +3,5 @@
   vars:
     repo_url: "{{ repo_url | default('https://github.com/Nicolas-Tondeur/exercice-global.git') }}"
     branch: "main"
-
-  tasks:
-    - name: Mise à jour des paquets et installation de Nginx
-      ansible.builtin.package:
-        name: nginx
-        state: present
-        update_cache: yes
-
-    - name: Démarrage et activation du service Nginx
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: yes
-        
   roles:
     - role: ../roles/app
