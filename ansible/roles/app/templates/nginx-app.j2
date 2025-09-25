@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
     server_name _;
 
-    root {{ app_dest }}/build;
+    root {{ app_dest }}/app/build;
     index index.html;
 
     access_log /var/log/nginx/{{ nginx_site_name }}_access.log;
