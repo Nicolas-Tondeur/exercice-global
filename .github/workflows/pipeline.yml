@@ -45,7 +45,7 @@ jobs:
           ssh-add ~/.ssh/id_rsa
 
 
-      - name: known_hosts ajout (ex: localhost:2222)
+      - name: known_hosts ajout
         run: |
-          ssh-keyscan -p 2222 -H 127.0.0.1 >> ~/.ssh/known_hosts || true
-          ssh-keyscan -p 2200 -H 127.0.0.1 >> ~/.ssh/kno
+          ssh-keyscan -p 2222 -H 54.87.104.124 >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 2200 -H 54.87.104.124 >> ~/.ssh/kno
