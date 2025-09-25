@@ -34,18 +34,12 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install ansible
 
-      - name: Configure SSH key
-        env:
-          SSH_KEY: ${{ secrets.DEV_SSH_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ github.ref == 'refs/heads/dev' && secrets.ID_RSA_DEV || secrets.ID_RSA_PROD }}
 
       - name: known_hosts ajout
         run: |
           ssh-keyscan -p 2222 -H 54.87.104.124 >> ~/.ssh/known_hosts || true
-          ssh-keyscan -p 2200 -H 54.87.104.124 >> ~/.ssh/kno
+          ssh-keyscan -p 2200 -H 54.87.104.124 >> ~/.ssh/known_hosts || true
