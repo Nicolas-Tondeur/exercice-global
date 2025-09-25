@@ -27,11 +27,20 @@ La structure du dépôt suit les bonnes pratiques pour un projet Ansible intégr
 
 
 ## 3. Configuration des Environnements Cibles (Étape 2)
+
+Pour des raisons de praticité, l’environnement Docker tourne sur une instance EC2 sur AWS.
+ 
+<img width="1510" height="555" alt="image" src="https://github.com/user-attachments/assets/afe8bdbd-2436-40ac-b312-150529afd091" />
+
+
 Les serveurs sont des conteneurs Docker avec accès SSH configuré.
 
 Environnement	  Hôte Simulé	    Port Externe	Branche Déployée
    DEV	        serveur-dev	       2222	            dev
-   PROD	        serveur-prod	     2200	           main
+   PROD	        serveur-prod	       2200	            main
+
+On a récupéré les Clés SSH de l'instance EC2 et des 2 conteneurs prod & dev pour les ajouter aux secrets GitHub.
+<img width="945" height="312" alt="image" src="https://github.com/user-attachments/assets/daf9cdb4-a4c4-4a88-9b63-85cf53355466" />
 
 
 ## 4. Configuration Ansible (Étapes 3 & 4)
@@ -74,15 +83,14 @@ Déploiement sur serveur-prod (via deploy-prod.yml)
 ## 6. Validation et Tests Finaux (Étape 7)
 Pour valider le bon fonctionnement de la chaîne CI/CD :
 
-Test DEV: Pousser une modification sur la branche dev. Le workflow doit se déclencher et l'application mise à jour doit être visible sur 
+Test DEV: Pousser une modification sur la branche dev. Le workflow doit se déclencher et l'application mise à jour doit être visible sur serveur-dev (Port 2222).
 
-serveur-dev (Port 2222).
-
-Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Production doit être déclenché, mettant à jour l'application sur 
-
-serveur-prod (Port 2200).
+Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Production doit être déclenché, mettant à jour l'application sur serveur-prod (Port 2200).
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
+
+Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
+<img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
 
 
 
