@@ -2,7 +2,7 @@
   become: yes
   vars:
     app_dest: /opt/app
-    repo_url: "{{ repo_url | default('https://github.com/Nicolas-Tondeur/exercice-global.git') }}"
+    repo_url: https://github.com/Nicolas-Tondeur/exercice-global.git
     branch: "dev"
   roles:
     - role: ../roles/app
