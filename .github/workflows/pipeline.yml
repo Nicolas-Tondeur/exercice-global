@@ -16,13 +16,16 @@ jobs:
           node-version: '18'
 
       - name: Install deps
-        run: npm install
+        run: npm ci
         working-directory: app
 
       - name: Run tests
-        run: npm test
+        run: npm test -- --watchAll=false
         working-directory: app
-
+    
+      - name: Build React
+        run: npm run build
+        working-directory: app
 
   deploy:
     name: Deployment with ansible
@@ -45,3 +48,13 @@ jobs:
         run: |
           ssh-keyscan -p 2222 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
           ssh-keyscan -p 2200 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
+          
+      - name: Deploy to Dev
+        if: github.ref == 'refs/heads/dev'
+        run: |
+          ansible-playbook -i ansible/inventory/dev.ini ansible/playbooks/deploy-dev.yml
+
+      - name: Deploy to Prod
+        if: github.ref == 'refs/heads/main'
+        run: |
+          ansible-playbook -i ansible/inventory/prod.ini ansible/playbooks/deploy-prod.yml

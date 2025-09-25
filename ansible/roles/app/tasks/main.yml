@@ -25,25 +25,34 @@
     version: "{{ branch }}"
     force: yes
 
+- name: Installer Node.js 18
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    apt-get install -y nodejs
+    
+- name: Vérifier version node
+  command: node -v
+
 
 - name: Installer dépendances node
-  command: npm ci
+  command: npm install
   args:
-    chdir: "{{ app_dest }}"
+    chdir: "{{ app_dest }}/app"
 
 
 - name: Builder l'application
   command: npm run build
   args:
-    chdir: "{{ app_dest }}"
+    chdir: "{{ app_dest }}/app"
 
 
 - name: Déployer config nginx depuis template
-  template:
+  ansible.builtin.template:
     src: nginx-app.j2
     dest: /etc/nginx/sites-available/{{ nginx_site_name }}
     mode: '0644'
-    notify: Reload nginx
+  notify: Reload nginx
+
 
 
 - name: Activer le site nginx

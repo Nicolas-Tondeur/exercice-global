@@ -1,0 +1,5 @@
+---
+app_dest: /opt/app
+nginx_site_name: reactapp
+repo_url: "https://github.com/Nicolas-Tondeur/exercice-global.git"
+branch: "main"
