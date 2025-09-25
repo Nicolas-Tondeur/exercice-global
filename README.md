@@ -25,25 +25,6 @@ La structure du dépôt suit les bonnes pratiques pour un projet Ansible intégr
 
 <img width="186" height="738" alt="image" src="https://github.com/user-attachments/assets/dec29e75-fb21-4f29-a74b-073ce2e124a0" />
 
-project-root/\
-├── .github/\
-│   └── workflows/\
-│       └── pipeline.yml         # Le workflow GitHub Actions\
-├── ansible/\
-│   ├── inventory/\
-│   │   ├── dev.ini              # Inventaire pour l'environnement DEV\
-│   │   └── prod.ini             # Inventaire pour l'environnement PROD\
-│   ├── playbooks/\
-│   │   ├── deploy-dev.yml       # Playbook de déploiement DEV\
-│   │   └── deploy-prod.yml      # Playbook de déploiement PROD\
-│   └── roles/\
-│       └── app/                 # Rôle Ansible pour le déploiement de l'application\
-│           ├── handlers/\
-│           └── tasks/\
-├── app/                         # Code source de l'application\
-├── .gitignore\
-└── README.md\
-
 
 ## 3. Configuration des Environnements Cibles (Étape 2)
 Les serveurs sont des conteneurs Docker avec accès SSH configuré.
@@ -102,6 +83,7 @@ Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Produ
 serveur-prod (Port 2200).
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
+
 
 
 
