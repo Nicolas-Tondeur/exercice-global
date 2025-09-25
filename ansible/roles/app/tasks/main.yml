@@ -29,13 +29,13 @@
 - name: Installer dépendances node
   command: npm ci
   args:
-    chdir: "{{ app_dest }}/app"
+    chdir: "{{ app_dest }}"
 
 
 - name: Builder l'application
   command: npm run build
   args:
-    chdir: "{{ app_dest }}/app"
+    chdir: "{{ app_dest }}"
 
 
 - name: Déployer config nginx depuis template
@@ -44,6 +44,7 @@
     dest: /etc/nginx/sites-available/{{ nginx_site_name }}
     mode: '0644'
     notify: Reload nginx
+
 
 
 - name: Activer le site nginx

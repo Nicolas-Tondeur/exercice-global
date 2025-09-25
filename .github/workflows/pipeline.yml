@@ -16,11 +16,15 @@ jobs:
           node-version: '18'
 
       - name: Install deps
-        run: npm install
+        run: npm ci
         working-directory: app
 
       - name: Run tests
-        run: npm test
+        run: npm test -- --watchAll=false
+        working-directory: app
+    
+      - name: Build React
+        run: npm run build
         working-directory: app
 
   deploy:
