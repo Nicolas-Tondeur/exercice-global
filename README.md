@@ -27,24 +27,25 @@ Les deux serveurs sont simulés par des conteneurs Docker pour reproduire un sc�
 2. Architecture du Dépôt
 La structure du dépôt suit les bonnes pratiques pour un projet Ansible intégré à un pipeline CI/CD:
 
-project-root/
-├── .github/
-│   └── workflows/
-│       └── pipeline.yml         # Le workflow GitHub Actions
-├── ansible/
-│   ├── inventory/
-│   │   ├── dev.ini              # Inventaire pour l'environnement DEV
-│   │   └── prod.ini             # Inventaire pour l'environnement PROD
-│   ├── playbooks/
-│   │   ├── deploy-dev.yml       # Playbook de déploiement DEV
-│   │   └── deploy-prod.yml      # Playbook de déploiement PROD
-│   └── roles/
-│       └── app/                 # Rôle Ansible pour le déploiement de l'application
-│           ├── handlers/
-│           └── tasks/
-├── app/                         # Code source de l'application
-├── .gitignore
-└── README.md
+project-root/\
+├── .github/\
+│   └── workflows/\
+│       └── pipeline.yml         # Le workflow GitHub Actions\
+├── ansible/\
+│   ├── inventory/\
+│   │   ├── dev.ini              # Inventaire pour l'environnement DEV\
+│   │   └── prod.ini             # Inventaire pour l'environnement PROD\
+│   ├── playbooks/\
+│   │   ├── deploy-dev.yml       # Playbook de déploiement DEV\
+│   │   └── deploy-prod.yml      # Playbook de déploiement PROD\
+│   └── roles/\
+│       └── app/                 # Rôle Ansible pour le déploiement de l'application\
+│           ├── handlers/\
+│           └── tasks/\
+├── app/                         # Code source de l'application\
+├── .gitignore\
+└── README.md\
+
 3. Configuration des Environnements Cibles (Étape 2)
 Les serveurs sont des conteneurs Docker avec accès SSH configuré.
 
@@ -125,4 +126,5 @@ serveur-prod (Port 2200).
 
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
+
 
