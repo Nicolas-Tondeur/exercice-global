@@ -2,7 +2,8 @@
 https://github.com/Nicolas-Tondeur/exercice-global/actions/runs/18015026928
 
 Exercice Final: Projet CI/CD & Déploiement Multi-Environnements (DEV/PROD)
-1. Contexte du Projet
+
+# 1. Contexte du Projet
 Ce projet vise à automatiser entièrement le cycle de vie d'une application Web, du code source au déploiement en production, en utilisant une chaîne d'intégration et de déploiement continu (CI/CD).
 
 
@@ -126,5 +127,6 @@ serveur-prod (Port 2200).
 
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
+
 
 
