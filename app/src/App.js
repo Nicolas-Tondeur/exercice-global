@@ -6,8 +6,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+        <h1>Welcome to React !</h1>
+         <p>
+          This site was deployed with Ansible and GitHub Actions !
         </p>
         <a
           className="App-link"
