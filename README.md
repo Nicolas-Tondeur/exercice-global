@@ -23,6 +23,8 @@ Les deux serveurs sont simulés par des conteneurs Docker pour reproduire un sc�
 ## 2. Architecture du Dépôt
 La structure du dépôt suit les bonnes pratiques pour un projet Ansible intégré à un pipeline CI/CD:
 
+<img width="186" height="738" alt="image" src="https://github.com/user-attachments/assets/dec29e75-fb21-4f29-a74b-073ce2e124a0" />
+
 project-root/\
 ├── .github/\
 │   └── workflows/\
@@ -100,6 +102,7 @@ Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Produ
 serveur-prod (Port 2200).
 
 Vérification: Les logs et la page de confirmation doivent être présents sur les deux serveurs pour attester de la bonne exécution des playbooks.
+
 
 
 
