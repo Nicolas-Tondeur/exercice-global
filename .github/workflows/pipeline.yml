@@ -1,29 +1,51 @@
-name: Deploy TestApp
-
+name: CI/CD Pipeline
 on:
   push:
-    branches:
-      - main
+    branches: [ dev, main ]
+
 
 jobs:
-  deploy:
-    runs-on: ubuntu-22.04
-
+  ci:
+    name: Tests & Lint
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Installer Ansible
-        run: sudo apt update && sudo apt install -y ansible sshpass
-
-      - name: Create private key file
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install deps
         run: |
-          echo "${{ secrets.AWS_SSH_KEY }}" > aws_app_todo.pem
-          chmod 600 aws_app_todo.pem
-
-      - name: Déploiement avec Ansible
+          npm ci
+      - name: Run tests
         run: |
-          ansible-playbook -i AWS/inventory_aws.ini AWS/deploy.yml
+          npm test
 
-      - name: Remove key file
-        run: rm -f aws_app_todo.pem
+
+  deploy:
+    name: Deploy (ansible)
+    needs: ci
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python & Ansible
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Configure SSH key
+        env:
+          SSH_KEY: ${{ secrets.DEV_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+
+
+      - name: known_hosts ajout (ex: localhost:2222)
+        run: |
+          ssh-keyscan -p 2222 -H 127.0.0.1 >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 2200 -H 127.0.0.1 >> ~/.ssh/kno

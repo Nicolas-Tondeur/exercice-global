@@ -1,0 +1,67 @@
+---
+- name: Mettre à jour le cache apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Installer paquets nécessaires
+  apt:
+    name: [git, nginx, nodejs, npm]
+    state: present
+
+- name: Créer le dossier de l'app
+  file:
+    path: "{{ app_dest }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+
+- name: Cloner / mettre à jour le dépôt
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ app_dest }}"
+    version: "{{ branch }}"
+    force: yes
+
+
+- name: Installer dépendances node
+  command: npm ci
+  args:
+    chdir: "{{ app_dest }}"
+
+
+- name: Builder l'application
+  command: npm run build
+  args:
+    chdir: "{{ app_dest }}"
+
+
+- name: Déployer config nginx depuis template
+  template:
+    src: nginx-app.j2
+    dest: /etc/nginx/sites-available/{{ nginx_site_name }}
+    mode: '0644'
+    notify: Reload nginx
+
+
+- name: Activer le site nginx
+  file:
+    src: /etc/nginx/sites-available/{{ nginx_site_name }}
+    dest: /etc/nginx/sites-enabled/{{ nginx_site_name }}
+    state: link
+
+
+- name: Supprimer le site default si présent
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+
+- name: Créer un log de déploiement
+  copy:
+    dest: /var/log/app-deploy.log
+    content: "Déploiement effectué le {{ ansible_date_time.date }} {{ ansible_date_time.time }} sur {{ inventory_hostname }}\n"
+    mode: '0644'
+    force: yes
