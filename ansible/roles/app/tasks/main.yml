@@ -25,9 +25,19 @@
     version: "{{ branch }}"
     force: yes
 
+- name: Installer Node.js 18
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+    apt-get install -y nodejs
+  args:
+    warn: false
+
+- name: Vérifier version node
+  command: node -v
+
 
 - name: Installer dépendances node
-  command: npm ci
+  command: npm install
   args:
     chdir: "{{ app_dest }}/app"
 
