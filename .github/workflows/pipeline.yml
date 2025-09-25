@@ -14,12 +14,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+
       - name: Install deps
-        run: |
-          npm install
+        run: npm ci
+        working-directory: app
+
       - name: Run tests
-        run: |
-          npm test
+        run: npm test
+        working-directory: app
 
 
   deploy:
