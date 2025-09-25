@@ -47,11 +47,11 @@ On a récupéré les Clés SSH de l'instance EC2 et des 2 conteneurs prod & dev 
 
 
 ## 4. Configuration Ansible (Étapes 3 & 4)
-Inventaires (ansible/inventory/)
+#### Inventaires (ansible/inventory/) : 
 Les fichiers dev.ini et prod.ini définissent les variables de connexion (hôte, port, utilisateur) spécifiques à chaque environnement. Les mots de passe et clés SSH sont gérés par des mécanismes sécurisés (GitHub Secrets ou Ansible Vault).
 
 
-Playbooks (ansible/playbooks/)
+#### Playbooks (ansible/playbooks/)
 Les playbooks sont conçus pour être spécifiques à un environnement:
 deploy-dev.yml / deploy-prod.yml:
 
@@ -109,6 +109,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
