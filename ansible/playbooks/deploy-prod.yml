@@ -1,21 +1,37 @@
-- hosts: prod
-  become: yes
-  vars:
-    repo_url: "{{ repo_url | default('https://github.com/Nicolas-Tondeur/exercice-global.git') }}"
-    branch: "main"
-
+- name: Déploiement PROD
+  hosts: prod
+  become: yes  # exécuter les tâches en root
   tasks:
-    - name: Mise à jour des paquets et installation de Nginx
-      ansible.builtin.package:
-        name: nginx
+
+    - name: Installer les dépendances
+      apt:
+        name:
+          - git
+          - nginx
         state: present
         update_cache: yes
 
-    - name: Démarrage et activation du service Nginx
-      ansible.builtin.service:
+    - name: Cloner le dépôt depuis GitHub
+      git:
+        repo: 'https://github.com/Nicolas-Tondeur/exercice-global.git'
+        dest: /opt/app
+        force: yes
+
+    - name: Copier les fichiers de l'application vers Nginx
+      copy:
+        src: /opt/app/
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: '0755'
+        remote_src: yes
+
+    - name: Redémarrer Nginx
+      service:
         name: nginx
-        state: started
-        enabled: yes
-        
-  roles:
-    - role: app
+        state: restarted
+
+    - name: Créer fichier de log de confirmation
+      copy:
+        content: "Déploiement DEV terminé le {{ ansible_date_time.date }} à {{ ansible_date_time.time }}"
+        dest: /opt/app/deploy.log

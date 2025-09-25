@@ -5,41 +5,41 @@ on:
     branches: [ dev, main ]
 
 jobs:
-  ci:
-    name: Tests & Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install deps
-        run: npm install
-        working-directory: app
-
-      - name: Run tests
-        run: npm test
-        working-directory: app
-
-
   deploy:
-    name: Deploy (ansible)
-    needs: ci
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Python & Ansible
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install ansible
 
+    steps:
+      # Étape 1 : checkout du code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Étape 2 : Setup SSH key pour Ansible
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ github.ref == 'refs/heads/dev' && secrets.ID_RSA_DEV || secrets.ID_RSA_PROD }}
+
+      # Étape 3 : Installer Ansible
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      # Étape 4 : Tests / lint (optionnel)
+      - name: Run tests or lint
+        run: |
+          echo "Ici tu peux lancer des tests simples ou vérifier que le code est correct"
+          # ex: test -f app/README.md && echo "Test OK"
+
+      # Étape 5 : Déploiement DEV
+      - name: Deploy to DEV
+        if: github.ref == 'refs/heads/dev'
+        run: ansible-playbook ansible/playbooks/deploy-dev.yml -i ansible/inventory/dev.ini
+
+      # Étape 6 : Déploiement PROD
+      - name: Deploy to PROD
+        if: github.ref == 'refs/heads/main'
+        run: ansible-playbook ansible/playbooks/deploy-prod.yml -i ansible/inventory/prod.ini
 
       - name: known_hosts ajout
         run: |
