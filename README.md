@@ -73,20 +73,16 @@ Cela garantit qu'aucun credential n'est stocké en clair dans le dépôt.
 ### 5.2. Logique du Déploiement (Étape 6)
 Le pipeline se déclenche automatiquement sur un push vers les branches dev ou main.
 
-Action sur la Branche	Pipeline CI (Test & Lint)	Pipeline CD (Déploiement Ansible)
-push sur dev : Exécuté 
+Action sur la Branche	Pipeline CI (Test & Lint)	puis Pipeline CD (Déploiement Ansible)
+push sur dev : Exécuté et Déploiement sur serveur-dev (via deploy-dev.yml) 
 
-Déploiement sur serveur-dev (via deploy-dev.yml) 
-
-push ou merge sur main : Exécuté 
-
-Déploiement sur serveur-prod (via deploy-prod.yml) 
+push ou merge sur main : Exécuté et Déploiement sur serveur-prod (via deploy-prod.yml) 
 
 
 ## 6. Validation et Tests Finaux (Étape 7)
 Pour valider le bon fonctionnement de la chaîne CI/CD :
 
-Test DEV: Pousser une modification sur la branche dev. Le workflow doit se déclencher et l'application mise à jour doit être visible sur serveur-dev (Port 2222).
+#### Test DEV: Pousser une modification sur la branche dev. Le workflow doit se déclencher et l'application mise à jour doit être visible sur serveur-dev (Port 2222).
 
 Résultat de l'exécution sur la branche dev : 
 
@@ -95,7 +91,7 @@ Résultat de l'exécution sur la branche dev :
 <img width="402" height="636" alt="image" src="https://github.com/user-attachments/assets/41254069-31b4-46d7-8f1a-dc3e74c6fa38" /> <img width="355" height="636" alt="image" src="https://github.com/user-attachments/assets/ee1f6c30-c70f-4a45-96b3-fe32f565541a" />
 
 
-Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Production doit être déclenché, mettant à jour l'application sur serveur-prod (Port 2200).
+#### Test PROD: Fusionner la branche dev dans main. Le workflow de déploiement Production doit être déclenché, mettant à jour l'application sur serveur-prod (Port 2200).
 
 Résultat de l'exécution sur la branche main : 
 
@@ -109,6 +105,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
