@@ -29,9 +29,7 @@
   shell: |
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
     apt-get install -y nodejs
-  args:
-    warn: false
-
+    
 - name: Vérifier version node
   command: node -v
 
