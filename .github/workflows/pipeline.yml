@@ -43,5 +43,5 @@ jobs:
 
       - name: known_hosts ajout
         run: |
-          ssh-keyscan -p 2222 -H 54.87.104.124 >> ~/.ssh/known_hosts || true
-          ssh-keyscan -p 2200 -H 54.87.104.124 >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 2222 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 2200 -H 54.198.132.209 >> ~/.ssh/known_hosts || true
