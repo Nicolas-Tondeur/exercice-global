@@ -28,7 +28,7 @@ jobs:
         working-directory: app
 
   deploy:
-    name: Deploy (ansible)
+    name: Deployment with ansible
     needs: ci
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
