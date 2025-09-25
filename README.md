@@ -22,6 +22,7 @@ Les deux serveurs sont simulés par des conteneurs Docker pour reproduire un sc�
 
 ## 2. Architecture du Dépôt
 La structure du dépôt suit les bonnes pratiques pour un projet Ansible intégré à un pipeline CI/CD:
+Le sit web déployé fonctionne avec ReactJs, ce qui explique la présence des dossiers nodes_modules, public, src ainsi que de package.json et package-lock.json 
 
 <img width="186" height="738" alt="image" src="https://github.com/user-attachments/assets/dec29e75-fb21-4f29-a74b-073ce2e124a0" />
 
@@ -107,6 +108,7 @@ Vérification: Les logs et la page de confirmation doivent être présents sur l
 Rendu final du site. On y accède via l’adresse ip publique de notre instance EC2 AWS.
 
 <img width="1524" height="835" alt="image" src="https://github.com/user-attachments/assets/f61a75fa-dc52-44a4-8ebd-a95c5ab2a2f1" />
+
 
 
 
